@@ -1,0 +1,26 @@
+clc
+r = 1;
+t = 0:pi/100:4*pi;
+x = r*cos(t);
+y = r*sin(t);
+
+h = plot(x,y)
+
+set(gca, "xlim", [-100,100],  "ylim", [-10,10])
+axis([-5,100,-10,10])
+axis equal
+
+k = 0
+while k<=2*pi
+
+
+  x = x + k;
+  tmp = x(1) - 1;
+  y = y + sin(tmp) - sin(tmp - k);
+
+
+  set(h, 'xdata', x, 'ydata', y)
+  pause(0.05)
+  drawnow
+  k = k + pi/100;
+end
