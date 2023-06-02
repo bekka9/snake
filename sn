@@ -3,7 +3,7 @@ n = 3;
 r = 0.25;
 t = linspace(0, 2*pi, 100);
 xlim = [-pi pi*7];
-ylim = [-pi pi+2];
+ylim = [-pi pi*3];
 
 
 hold on;
@@ -17,7 +17,7 @@ phi = 0
 for i = 1:n
   x(i) = xlim(1) + r + pi/12 * i;
   y(i) = sin(x(i));
-  h(i) = plot(x(i) + r*cos(t), y(i) + r*sin(t), 'Color', rand(1, n), 'Linewidth', 2);
+  h(i) = plot(x(i) + r*cos(t), y(i) + r*sin(t), 'Color', 'g', 'Linewidth', 3);
   speed(i) = 0.1;
   angle(i) = 1;
 end
