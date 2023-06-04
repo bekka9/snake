@@ -10,7 +10,7 @@ x = r*cos(t);
 y = r*sin(t);
 h = plot(x,y)
 
-set(gca, "xlim", [0,100],  "ylim", [-50,50])
+set(gca, "xlim", [0,100],  "ylim", [-10,10])
 axis equal
 n = 4
 k = 0
