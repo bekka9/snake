@@ -4,11 +4,13 @@ r = 1;
 t = 0:pi/100:4*pi;
 %t = linspace(0, 2*pi, 100);
 
+f = @(x) sin(x);
+
 x = r*cos(t);
 y = r*sin(t);
 h = plot(x,y)
 
-set(gca, "xlim", [0,100],  "ylim", [-10,10])
+set(gca, "xlim", [0,100],  "ylim", [-50,50])
 axis equal
 n = 4
 k = 0
@@ -21,7 +23,7 @@ r_vel = r + pi/4;
 hold on;
 for c = 1:n
   x_(c) = vel*c + r_vel*c;
-  y_(c) = sin(x_(c));
+  y_(c) = f(x_(c));
   h_(c) = plot(x_(c), y_(c))
 end
 
@@ -47,7 +49,7 @@ while true
 ##  y_(n) = sin(x_(c));
   for c = 1:n
     x_(c) += vel + r_vel;
-    y_(c) = sin(x_(c));
+    y_(c) = f(x_(c));
     set(h_(c), 'xdata', x_(c) + r*cos(t), 'ydata', y_(c) +r*sin(t))
   endfor
   if x_(1) < (0 + r) || x_(n) > (100 - r)
