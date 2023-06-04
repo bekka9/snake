@@ -1,38 +1,65 @@
-clc;
-n = 3;
-r = 0.25;
-t = linspace(0, 2*pi, 100);
-xlim = [-pi pi*7];
-ylim = [-pi pi*3];
+#-----------------------------------------------
+clc
+r = 1;
+t = 0:pi/100:4*pi;
+%t = linspace(0, 2*pi, 100);
 
+x = r*cos(t);
+y = r*sin(t);
+h = plot(x,y)
 
+set(gca, "xlim", [0,100],  "ylim", [-10,10])
+axis equal
+n = 4
+k = 0
+x_ = zeros(1, n);
+y_ = zeros(1, n);
+h_ = zeros(1, n);
+
+vel = 0.1;
+r_vel = r + pi/4;
 hold on;
-
-x = zeros(1, n);
-y = zeros(1, n);
-h = zeros(1, n);
-speed = zeros(1, n);
-angle = zeros(1, n);
-phi = 0
-for i = 1:n
-  x(i) = xlim(1) + r + pi/12 * i;
-  y(i) = sin(x(i));
-  h(i) = plot(x(i) + r*cos(t), y(i) + r*sin(t), 'Color', 'g', 'Linewidth', 3);
-  speed(i) = 0.1;
-  angle(i) = 1;
+for c = 1:n
+  x_(c) = vel*c + r_vel*c;
+  y_(c) = sin(x_(c));
+  h_(c) = plot(x_(c), y_(c))
 end
-axis([xlim(1) xlim(2) ylim(1) ylim(2)]);
+
+i=1;
+%vel = pi/100;
 
 while true
 
-  for i = 1:n
-    x(i) = x(i) + speed(i);
-    y(i) = sin(x(i));
-    set(h(i), 'XData', x(i)*cos(phi) - y(i) * sin(phi) + r*cos(t), 'YData', x(i)*sin(phi) + y(i)*cos(phi) + r*sin(t));
-    if x(i) < (xlim(1) + r) || x(i) > (xlim(2) - r)
-        speed(i) = -speed(i);
+##  x += vel;
+##  y = sin(x);
+## % y = y + sin(x);
+##  %if x < (0 + r) || x > (100 - r)
+####       vel = -vel;
+####       i = 1;
+####  end
+##  set(h, 'xdata', x + r*cos(t), 'ydata', y +r*sin(t))
 
-    end
+##  for c = 1:n-1
+##     x_(c) = x_(c + 1);
+##     y_(c) = y_(c + 1);
+##  endfor
+##  x_(n) += vel*c + r;
+##  y_(n) = sin(x_(c));
+  for c = 1:n
+    x_(c) += vel + r_vel;
+    y_(c) = sin(x_(c));
+    set(h_(c), 'xdata', x_(c) + r*cos(t), 'ydata', y_(c) +r*sin(t))
+  endfor
+  if x_(1) < (0 + r) || x_(n) > (100 - r)
+       vel = -vel;
+       r_vel = -r_vel;
+       i = 1;
   end
-  pause(0.005);
+    pause(0.5)
+    drawnow
+
+  k = k + pi/100;
+  i += 1;
 end
+
+#-------------------------------------------
