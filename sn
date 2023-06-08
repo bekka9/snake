@@ -1,6 +1,6 @@
 #-----------------------------------------------
 clc
-r = 1;
+r = 0.5;
 t = 0:pi/100:4*pi;
 %t = linspace(0, 2*pi, 100);
 
@@ -19,7 +19,7 @@ y_ = zeros(1, n);
 h_ = zeros(1, n);
 
 vel = 0.1;
-r_vel = r + pi/4;
+r_vel = r + pi/12;
 hold on;
 for c = 1:n
   x_(c) = vel*c + r_vel*c;
@@ -48,7 +48,7 @@ while true
 ##  x_(n) += vel*c + r;
 ##  y_(n) = sin(x_(c));
   for c = 1:n
-    x_(c) += vel + r_vel;
+    x_(c) += (vel + r_vel);
     y_(c) = f(x_(c));
     set(h_(c), 'xdata', x_(c) + r*cos(t), 'ydata', y_(c) +r*sin(t))
   endfor
@@ -57,7 +57,7 @@ while true
        r_vel = -r_vel;
        i = 1;
   end
-    pause(0.5)
+    pause(0.1)
     drawnow
 
   k = k + pi/100;
